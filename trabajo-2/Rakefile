@@ -22,14 +22,14 @@ require 'pg'  #Ruby gem que se usa para conectar a postgres
 #Variables de entorno para la conexion con MySQL
 ENV['MYSQL_HOST'] ||= "localhost"
 ENV['MYSQL_USER'] ||= "root"
-ENV['MYSQL_PASSWD'] ||= ""
+ENV['MYSQL_PASSWD'] ||= "annysdf"
 ENV['MYSQL_PORT'] ||= '3306'
 ENV['MYSQL_DB'] ||= "intro_joins"
 
 #Variables de entorno para la conexion con Postgres
 ENV['PG_HOST'] ||= "localhost"
 ENV['PG_USER'] ||= "postgres"
-ENV['PG_PASSWD'] ||= ""
+ENV['PG_PASSWD'] ||= "annysdf"
 ENV['PG_PORT'] ||= '5432'
 =begin
   PostgreSQL requiere q se especifique una BD para establecer la conexion (maintenance database).
@@ -190,7 +190,7 @@ namespace :"uni-bd-2013" do
     task :dump_schema do |t, args|
       if ENV['SCHEMA_NAME']
         Dir.mkdir(ENV['SCHEMA_NAME']) unless File.exists?(ENV['SCHEMA_NAME']) 
-        exec("pg_dump -U #{ENV['PG_USER']} -W -n #{ENV['SCHEMA_NAME']} --schema-only #{PgTrabajo2.dbname} > #{ENV['SCHEMA_NAME']}/#{ENV['SCHEMA_NAME']}.sql")
+        exec("pg_dump -h #{ENV['PG_HOST']} -U #{ENV['PG_USER']} -W -n #{ENV['SCHEMA_NAME']} --schema-only #{PgTrabajo2.dbname} > #{ENV['SCHEMA_NAME']}/#{ENV['SCHEMA_NAME']}.sql")
       else
         puts "Debe especificar el SCHEMA_NAME que ha utilizado para el Trabajo 2." 
         puts "Ejemplo:"
